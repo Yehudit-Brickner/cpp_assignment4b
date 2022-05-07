@@ -89,10 +89,10 @@ void Player::foreign_aid(){
 }
 
 
-// void Player::block(coup::Player p){
-//     // will need a queue to hold the last full turns of things to know what to block and how to rool back
-//     cout<< "blocked"<<endl;
-// }
+void Player::block(coup::Player p){
+    // will need a queue to hold the last full turns of things to know what to block and how to rool back
+    cout<< "blocked"<<endl;
+}
 
 
 

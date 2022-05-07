@@ -34,7 +34,7 @@ namespace coup {
             void income();
             void foreign_aid(); 
             void virtual coup(Player p) ;
-            // void virtual block(Player p);
+            void virtual block(Player p);
             void setState(int s);
             void print();
     };
@@ -43,56 +43,56 @@ namespace coup {
 
    
 
-    class Assassin : public Player{
+    // class Assassin : public Player{
 
-        public:
-            Assassin(Game & g, string n);
-            ~Assassin(){}     
-            void coup(Player p) override;
-            string role() override;
-    };
+    //     public:
+    //         Assassin(Game & g, string n);
+    //         ~Assassin(){}     
+    //         void coup(Player p) override;
+    //         string role() override;
+    // };
 
-     class Duke : public Player {
+    //  class Duke : public Player {
 
-        public:
-            Duke(Game & g, string n);
-            ~Duke(){} 
-            void tax();
-            void block(coup::Player p);
-            string role() override;
-    };   
+    //     public:
+    //         Duke(Game & g, string n);
+    //         ~Duke(){} 
+    //         void tax();
+    //         void block(coup::Player p);
+    //         string role() override;
+    // };   
 
-    class Captain : public Player{
+    // class Captain : public Player{
 
-        public:
-            Captain(Game & g, string n);
-            ~Captain(){}  
-            void steal(coup::Player p);
-            void block(coup::Captain c);
-            // void block(coup:: Duke d);
-            string role() override;
-    };
+    //     public:
+    //         Captain(Game & g, string n);
+    //         ~Captain(){}  
+    //         void steal(coup::Player p);
+    //         void block(coup::Captain c);
+    //         // void block(coup:: Duke d);
+    //         string role() override;
+    // };
     
-     class Ambassador : public Player{
+    //  class Ambassador : public Player{
 
-        public: 
-            Ambassador(Game & g, string n);
-            ~Ambassador(){}              
-            void block(coup::Captain c);
-            void transfer(coup::Player p1, coup::Player p2);
-            string role() override;
+    //     public: 
+    //         Ambassador(Game & g, string n);
+    //         ~Ambassador(){}              
+    //         void block(coup::Captain c);
+    //         void transfer(coup::Player p1, coup::Player p2);
+    //         string role() override;
     
-    };
+    // };
 
-    class Contessa : public Player{
+    // class Contessa : public Player{
 
-       public:
-            Contessa(Game & g, string n);      
-            ~Contessa(){} 
-            void block(coup::Assassin a);
-            string role() override;
+    //    public:
+    //         Contessa(Game & g, string n);      
+    //         ~Contessa(){} 
+    //         void block(coup::Assassin a);
+    //         string role() override;
             
-    };
+    // };
 
     
 

@@ -1,5 +1,5 @@
 
-#include "Player.hpp"
+#include "Ambassador.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -44,20 +44,20 @@ void Ambassador::transfer(coup::Player p1, coup::Player p2){
     this->_game->updateTurn(); 
 }
 
-void Ambassador::block(coup::Captain c){
-    int start=(int)this->_game->_gameTurns.size()-1;
-    int size=(int)this->_game->_player.size();
-    int end=start-size;
-    if(end<0){
-        end=0;
-    }
-    for (unsigned long i=(unsigned long)start; i >= (unsigned long) end;i--){
-        if(this->_game->_gameTurns[i]->getPlayer()==&c and this->_game->_gameTurns[i]->getAction()=="steal" and this->_game->_gameTurns[i]->getBlocked()==false ){
-           cout<<"blocked"<<endl;
-           vector<Player*> p=this->_game->_gameTurns[i]->getDoneTo();
-           p[0]->updateCoins(2);
-           c.updateCoins(-2); 
-           this->_game->_gameTurns[i]->setBlocked(true);  
-        }
-    }
-}
+// void Ambassador::block(coup::Captain c){
+//     int start=(int)this->_game->_gameTurns.size()-1;
+//     int size=(int)this->_game->_player.size();
+//     int end=start-size;
+//     if(end<0){
+//         end=0;
+//     }
+//     for (unsigned long i=(unsigned long)start; i >= (unsigned long) end;i--){
+//         if(this->_game->_gameTurns[i]->getPlayer()==&c and this->_game->_gameTurns[i]->getAction()=="steal" and this->_game->_gameTurns[i]->getBlocked()==false ){
+//            cout<<"blocked"<<endl;
+//            vector<Player*> p=this->_game->_gameTurns[i]->getDoneTo();
+//            p[0]->updateCoins(2);
+//            c.updateCoins(-2); 
+//            this->_game->_gameTurns[i]->setBlocked(true);  
+//         }
+//     }
+// }

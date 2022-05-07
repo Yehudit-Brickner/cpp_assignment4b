@@ -1,6 +1,4 @@
-#include "Player.hpp"
-
-
+#include "Duke.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -45,38 +43,37 @@ void Duke::tax(){
 }
 
 
-void Duke::block(Player pl){
-    cout<<"enter block"<<endl;
-    int start=(int)this->_game->_gameTurns.size()-1;
-    int size=(int)this->_game->_player.size()-1;
-    int end=start-size;
-    if(end<0){
-        end=0;
-    }
-    cout<< "start= "<< start<< " end= "<< end <<endl;
-    unsigned long s =(unsigned long) start;
-    unsigned long e =(unsigned long) end;
-    cout<< "s= "<< s<< " e= "<< e <<endl;
-    for (unsigned long i=s; i >= e; i--){
-        cout<< "i= "<<i<< endl;
+// void Duke::block(Player pl){
+//     cout<<"enter block"<<endl;
+//     int start=(int)this->_game->_gameTurns.size()-1;
+//     int size=(int)this->_game->_player.size()-1;
+//     int end=start-size;
+//     if(end<0){
+//         end=0;
+//     }
+//     cout<< "start= "<< start<< " end= "<< end <<endl;
+//     unsigned long s =(unsigned long) start;
+//     unsigned long e =(unsigned long) end;
+//     cout<< "s= "<< s<< " e= "<< e <<endl;
+//     for (unsigned long i=s; i >= e; i--){
+//         cout<< "i= "<<i<< endl;
         
-        // cout<<"who played  "<< (this->_game->_gameTurns[i]->_whoPlayed)<<endl;
-        cout<<this->_game->_gameTurns[i]->_whoPlayed<<endl;
-        if(this->_game->_gameTurns[i]->_action=="forign_aid"){
-            cout<< "correct action"<<endl;
-            if(this->_game->_gameTurns[i]->_blocked==false){
-                cout<< "turn has not been blocked"<<endl;
-            }
-        }
+//         // cout<<"who played  "<< (this->_game->_gameTurns[i]->_whoPlayed)<<endl;
+//         cout<<this->_game->_gameTurns[i]->_whoPlayed<<endl;
+//         if(this->_game->_gameTurns[i]->_action=="forign_aid"){
+//             cout<< "correct action"<<endl;
+//             if(this->_game->_gameTurns[i]->_blocked==false){
+//                 cout<< "turn has not been blocked"<<endl;
+//             }
+//         }
 
-        // if(this->_game->_gameTurns[i]->getPlayer()==&pl && this->_game->_gameTurns[i]->getAction()=="forign_aid" && this->_game->_gameTurns[i]->getBlocked()==false ){
-        //    cout<<"blocked"<<endl;
-        //    vector<Player*> p=this->_game->_gameTurns[i]->getDoneTo();
-        //    cout<< "captain2 has "<< p[0]->coins() << " coins"<<endl;
-        //    p[0]->updateCoins(-2);
-        //    cout<< "captain2 has "<< p[0]->coins() << " coins"<<endl;
+//         // if(this->_game->_gameTurns[i]->getPlayer()==&pl && this->_game->_gameTurns[i]->getAction()=="forign_aid" && this->_game->_gameTurns[i]->getBlocked()==false ){
+//         //    cout<<"blocked"<<endl;
+//         //    vector<Player*> p=this->_game->_gameTurns[i]->getDoneTo();
+//         //    cout<< "captain2 has "<< p[0]->coins() << " coins"<<endl;
+//         //    p[0]->updateCoins(-2);
+//         //    cout<< "captain2 has "<< p[0]->coins() << " coins"<<endl;
 
-        // }
-    }
-           
-}
+//         // }
+//     }         
+// }
