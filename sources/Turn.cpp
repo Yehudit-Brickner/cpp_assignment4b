@@ -8,11 +8,24 @@ using namespace std;
 
 using namespace coup;
 
-Turn::Turn(Player &  p,int c, string s, vector<Player*> v){
+
+Turn::Turn(Player &  p,int c, string s, Player & d1, Player & d2){
     this->_whoPlayed = &p;
     this->coins_stolen=c;
     this->_action=s;
-    this->_doneTo=v;
+    this->_doneto1=&d1;
+    this->_doneto2=&d2;
+    // this->_doneTo=v;
+    this->_blocked=false;        
+}
+
+
+Turn::Turn(Player &  p,int c, string s, Player & d1){
+    this->_whoPlayed = &p;
+    this->coins_stolen=c;
+    this->_action=s;
+    this->_doneto1=& d1;
+    // this->_doneTo=v;
     this->_blocked=false;        
 }
 
@@ -44,8 +57,17 @@ string Turn::getAction(){
     return this->_action;
 }
 
-vector<Player*> Turn::getDoneTo(){
-    return this->_doneTo;
+// vector<Player*> Turn::getDoneTo(){
+//     return this->_doneTo;
+// }
+
+Player* Turn::getDoneto1(){
+    return this->_doneto1;
+}
+
+
+Player* Turn::getDoneto2(){
+    return this->_doneto2;
 }
 
 bool Turn::getBlocked(){

@@ -29,7 +29,7 @@ class Assassin : public Player{
         public:
             Assassin(Game & g, string n);
             ~Assassin(){}     
-            void coup(Player p) override;
+            void coup(Player & p) override;
             string role() override;
     };
 }

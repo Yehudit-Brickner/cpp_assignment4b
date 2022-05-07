@@ -28,17 +28,17 @@ string Assassin::role(){
 }
 
 
-void Assassin::coup(Player p){
+void Assassin::coup(Player & p){
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
     }
     if(this->_coins>=7){
+        cout<<"Assasin coup7"<<endl;
         this->updateCoins(-7);
-        // kill p
         p.setState(1);
-        vector<Player*> v1={&p};
-        Turn t1{*this, 0,"coup7",v1};
+        // vector<Player*> v1={&p};
+        Turn t1{*this, 0,"coup7",p};
         // this->_game->gameTurns.push(&t1);
         this->_game->_gameTurns.push_back(&t1);
         this->_game->updateTurn();     
@@ -46,11 +46,11 @@ void Assassin::coup(Player p){
     if(this->_coins<3){
          throw std::invalid_argument( "cant pay 3 coins" ); 
     }
+    cout<<"Assasin coup3"<<endl;
     this->updateCoins(-3);
-    // kill p
     p.setState(1);
-    vector<Player*> v1={&p};
-    Turn t1{*this,0, "coup3",v1};
+    // vector<Player*> v1={&p};
+    Turn t1{*this,0, "coup3",p};
     // this->_game->gameTurns.push(&t1);
     this->_game->_gameTurns.push_back(&t1);
     this->_game->updateTurn(); 

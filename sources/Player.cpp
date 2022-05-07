@@ -61,9 +61,9 @@ void Player::income(){
         throw std::invalid_argument( "you have to do coup!" );  
     }
 
-    cout<<"income"<<endl;
+    // cout<<"income"<<endl;
     updateCoins(1);
-    cout<<"added a coin"<<endl;
+    // cout<<"added a coin"<<endl;
     Turn t1{*this, 0,"income"};
     // this->_game->gameTurns.push(&t1);
     this->_game->_gameTurns.push_back(&t1);
@@ -89,9 +89,38 @@ void Player::foreign_aid(){
 }
 
 
-void Player::block(coup::Player p){
+void Player::block(coup::Player & p){
     // will need a queue to hold the last full turns of things to know what to block and how to rool back
-    cout<< "blocked"<<endl;
+
+    cout<< "blocked"<< endl;
+    if( this->role()=="Contessa" && p.role()=="Assassin"){
+        cout<< "Contessa blocking Assasin"<<endl;
+        int start=(int)this->_game->_gameTurns.size()-1;
+        int size=(int)this->_game->_player.size();
+        int end=start-size;
+        if(end<0){
+            end=0;
+        }
+        cout<< "start and end "<< start<<  "  "<< end<< endl;
+        for (unsigned long i=(unsigned long)start; i > (unsigned long)end;i--){
+            cout<<i<<endl;
+            if(this->_game->_gameTurns[i]->_blocked==false ){
+                cout<<"hasnt been blocked yet"<<endl;
+                // cout<< this->_game->_gameTurns[i]->_action<<endl;
+                if( this->_game->_gameTurns[i]->getAction()=="coup3"){
+                    cout<<"matched action"<<endl;
+                    if(this->_game->_gameTurns[i]->getPlayer()==&p ){
+                        cout<< "matched player"<<endl;
+                        // vector<Player*> play=this->_game->_gameTurns[i]->getDoneTo();
+                        // play[0]->setState(0);
+                        this->_game->_gameTurns[i]->_doneto1->setState(0);
+                        this->_game->_gameTurns[i]->setBlocked(true);
+                        cout<<"blocked"<<endl;
+                    } 
+                }
+            }
+        }
+    }
 }
 
 
@@ -101,7 +130,7 @@ string Player::role(){
 }
 
 
-void Player::coup(coup::Player p){
+void Player::coup(coup::Player & p){
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
@@ -112,15 +141,27 @@ void Player::coup(coup::Player p){
 
     
     if (this->_role=="assassin"){
-        if (this->_coins<money2){
-            throw std::invalid_argument( "cant pay 7 coins" ); 
+        if(this->_coins>=money1){
+            cout<<"Assasin coup7"<<endl;
+            this->updateCoins(-7);
+            p.setState(1);
+            // vector<Player*> v1={&p};
+            Turn t1{*this, 0,"coup7",p};
+            // this->_game->gameTurns.push(&t1);
+            this->_game->_gameTurns.push_back(&t1);
+            this->_game->updateTurn();     
         }
+        if(this->_coins<money2){
+            throw std::invalid_argument( "cant pay 3 coins" ); 
+        }
+        cout<<"Assasin coup3"<<endl;
+        this->updateCoins(-3);
         p.setState(1);
-        vector<Player*> v1={&p};
-        Turn t1{*this, 0,"coup", v1};
+        // vector<Player*> v1={&p};
+        Turn t1{*this,0, "coup3",p};
         // this->_game->gameTurns.push(&t1);
         this->_game->_gameTurns.push_back(&t1);
-        this->_game->updateTurn();
+        this->_game->updateTurn(); 
 
     }
     else{
@@ -130,8 +171,8 @@ void Player::coup(coup::Player p){
     
         p.setState(1);
         cout<<"the assigned player state is "<< p._state <<endl;
-        vector<Player*> v1={&p};
-        Turn t1{*this, 0,"coup",v1};
+        // vector<Player*> v1={&p};
+        Turn t1{*this, 0,"coup", p};
         // this->_game->gameTurns.push(&t1);
         this->_game->_gameTurns.push_back(&t1);
         this->_game->updateTurn(); 

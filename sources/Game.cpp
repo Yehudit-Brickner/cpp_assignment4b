@@ -47,11 +47,23 @@ using namespace coup;
 
 
     void Game::updateTurn(){    
-        cout<<"state of old player "<<this->_player[(unsigned long)this->_turn]->_state<< endl; 
-        cout<< "address of old player "<< this->_player[(unsigned long)this->_turn]<<endl;       
-        this->_turn=(this->_turn+1)%(int)this->_player.size();
-        cout<<"state of new player "<<this->_player[(unsigned long)this->_turn]->_state<< endl;
-        cout<< "address of new player "<< this->_player[(unsigned long)this->_turn]<<endl;
+        // cout<<"state of old player "<<this->_player[(unsigned long)this->_turn]->_state<< endl; 
+        // cout<< "address of old player "<< this->_player[(unsigned long)this->_turn]<<endl; 
+        int s=1;
+        while (s!=0){
+            this->_turn=(this->_turn+1)%(int)this->_player.size();
+            s=this->_player[(unsigned long)this->_turn]->_state;
+            if(s==1){
+                this->_player[(unsigned long)this->_turn]->setState(2);
+            }
+            if(s==2){
+                int el=this->_turn;
+                this->_player.erase(this->_player.begin() + el);
+            }
+        }
+
+        // cout<<"state of new player "<<this->_player[(unsigned long)this->_turn]->_state<< endl;
+        // cout<< "address of new player "<< this->_player[(unsigned long)this->_turn]<<endl;
     }
 
  

@@ -37,8 +37,8 @@ void Ambassador::transfer(coup::Player p1, coup::Player p2){
     }
     p1.updateCoins(-1);
     p2.updateCoins(1);
-    vector<Player*> v1={&p1,&p2};
-    Turn t1{*this, 1,"transfer",v1};
+    // vector<Player*> v1={&p1,&p2};
+    Turn t1{*this, 1,"transfer",p1,p2};
     // this->_game->gameTurns.push(&t1);
     this->_game->_gameTurns.push_back(&t1);
     this->_game->updateTurn(); 

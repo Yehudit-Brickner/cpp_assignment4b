@@ -35,8 +35,8 @@ void Captain::steal(coup::Player p){
     }
     p.updateCoins(-2);
     this->updateCoins(2);
-    vector<Player*> v1={&p};
-    Turn t1{*this,2, "steal"};
+    // vector<Player*> v1={&p};
+    Turn t1{*this,2, "steal",p};
     // this->_game->gameTurns.push(&t1);
     this->_game->_gameTurns.push_back(&t1);
     this->_game->updateTurn(); 

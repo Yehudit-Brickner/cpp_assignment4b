@@ -33,8 +33,8 @@ namespace coup {
             virtual string role();
             void income();
             void foreign_aid(); 
-            void virtual coup(Player p) ;
-            void virtual block(Player p);
+            void virtual coup(Player & p) ;
+            void virtual block(Player & p);
             void setState(int s);
             void print();
     };
