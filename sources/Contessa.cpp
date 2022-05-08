@@ -10,16 +10,20 @@ using namespace coup;
 
 Contessa::Contessa(Game & g, string n){
     cout<< "this is a constructor for Contessa"<< endl;
-    this->_game=& g;
-    this->_name=n;
-    this->_coins=0;
-    this->_role="Contessa";
-    this->_state = 0;
-    this->_lastturn="none";
     if (g._player.size()<6){
+        this->_game=& g;
+        this->_name=n;
+        this->_coins=0;
+        this->_role="Contessa";
+        this->_state = 0;
+        this->_lastturn="none";
+        g.addplayer(n);
         g._player.push_back(& *this);
     }
-    g.addplayer(n);
+    else{
+       throw std::invalid_argument( "too many players!" );  
+    }
+   
 }
 
 

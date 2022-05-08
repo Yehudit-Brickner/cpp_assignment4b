@@ -10,16 +10,19 @@ using namespace coup;
 
 Duke::Duke(Game & g, string n){
     cout<< "this is a constructor for Duke"<< endl;
-    this->_game = & g;
-    this->_name = n;
-    this->_coins = 0;
-    this->_role = "Duke";
-    this->_state = 0;
-    this->_lastturn="none";
     if (g._player.size()<6){
+        this->_game = & g;
+        this->_name = n;
+        this->_coins = 0;
+        this->_role = "Duke";
+        this->_state = 0;
+        this->_lastturn="none";
         g._player.push_back(& *this);
+        g.addplayer(n);
     }
-    g.addplayer(n);
+    else{
+       throw std::invalid_argument( "too many players!" );  
+    }
 }
 
 
@@ -29,12 +32,16 @@ string Duke::role(){
 
 void Duke::tax(){
     const int ten=10; 
+    const int one=1;
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
     }
     if(this->_coins>=ten){
         throw std::invalid_argument( "you have to do coup!" );  
+    }
+    if(this->_game->_player.size()<=one){
+      throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
     this->updateCoins(3);
     cout<<"duke took tax"<<endl;

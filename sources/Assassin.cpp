@@ -10,16 +10,20 @@ using namespace coup;
 
 Assassin::Assassin(Game & g, string n) {
     cout<< "this is a constructor for Assassin"<< endl;
-    this->_game= & g;
-    this->_name=n;
-    this->_coins=0;
-    this->_role="Assassin";
-    this->_state = 0;
-    this->_lastturn="none";
-     if (g._player.size()<6){
+    if (g._player.size()<6){
+        this->_game= & g;
+        this->_name=n;
+        this->_coins=0;
+        this->_role="Assassin";
+        this->_state = 0;
+        this->_lastturn="none";
         g._player.push_back(& *this);
+        g.addplayer(n);
     }
-    g.addplayer(n);
+    else{
+       throw std::invalid_argument( "too many players!" );  
+    }
+    
 }
 
 
@@ -33,9 +37,13 @@ void Assassin::coup(Player & p){
 
     const int seven=7;
     const int three=3;
+    const int one=1;
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
+    }
+    if(this->_game->_player.size()<=one){
+      throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
     vector<string>play=this->_game->players();
     bool found=false;
@@ -63,9 +71,10 @@ void Assassin::coup(Player & p){
         // this->_game->_gameTurns.push_back(&t1);
         this->_game->updateTurn();     
     }
-    if(this->_coins<three){
-         throw std::invalid_argument( "cant pay 3 coins" ); 
-    }
+    else{
+        if(this->_coins<three){
+            throw std::invalid_argument( "cant pay 3 coins" ); 
+        }
     cout<<"Assasin coup3"<<endl;
     this->updateCoins(-3);
     p.setState(1);
@@ -79,4 +88,5 @@ void Assassin::coup(Player & p){
     // this->_game->gameTurns.push(&t1);
     // this->_game->_gameTurns.push_back(&t1);
     this->_game->updateTurn(); 
+    }
 }

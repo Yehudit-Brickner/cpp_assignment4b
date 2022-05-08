@@ -10,16 +10,19 @@ using namespace coup;
 
 Captain::Captain(Game & g, string n){
     cout<< "this is a constructor for Captain"<< endl;
-    this->_game=& g;
-    this->_name=n;
-    this->_coins=0;
-    this->_role="Captain";
-    this->_state = 0;
-    this->_lastturn="none";
     if (g._player.size()<6){
+        this->_game=& g;
+        this->_name=n;
+        this->_coins=0;
+        this->_role="Captain";
+        this->_state = 0;
+        this->_lastturn="none";
         g._player.push_back(& *this);
+        g.addplayer(n);
     }
-    g.addplayer(n);
+    else{
+       throw std::invalid_argument( "too many players!" );  
+    }
 }
 
 string Captain::role(){
@@ -36,6 +39,9 @@ void Captain::steal(coup::Player & p){
     }
     if(this->_coins>=ten){
         throw std::invalid_argument( "you have to do coup!" );  
+    }
+    if(this->_game->_player.size()<=one){
+      throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
     if(p.coins()>=two){
         p.updateCoins(-2);

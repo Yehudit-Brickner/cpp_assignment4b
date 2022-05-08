@@ -11,15 +11,19 @@ using namespace coup;
 
 Player::Player(Game & g, string n){
     cout<< "this is a constructor for player"<< endl;
-    this->_game=& g;
-    this->_name=n;
-    this->_coins=0;
-    this->_role="Player";
-    this->_lastturn="none";
     if (g._player.size()<6){
+        this->_game=& g;
+        this->_name=n;
+        this->_coins=0;
+        this->_role="Player";
+        this->_lastturn="none";
+        g.addplayer(n);
         g._player.push_back(& *this);
     }
-    g.addplayer(n);
+    else{
+       throw std::invalid_argument( "too many players!" );  
+    }
+    
 }
 
 Player::Player(){
@@ -62,13 +66,17 @@ void Player::print(){
 
 
 void Player::income(){
-    const int ten=10; 
+    const int ten=10;
+    const int one=1;
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
         throw std::invalid_argument( "not your turn!" ); 
     }
     if(this->_coins>=ten){
         throw std::invalid_argument( "you have to do coup!" );  
+    }
+    if(this->_game->_player.size()<=one){
+      throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
 
     // cout<<"income"<<endl;
@@ -85,12 +93,16 @@ void Player::income(){
 
 void Player::foreign_aid(){
     const int ten=10; 
+    const int one=1;
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
     }
     if(this->_coins>=ten){
         throw std::invalid_argument( "you have to do coup!" );  
+    }
+    if(this->_game->_player.size()<=one){
+      throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
     
     cout<<"forign_aid"<<endl;

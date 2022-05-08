@@ -16,11 +16,11 @@ OBJECTS=$(subst sources/,objects/,$(subst .cpp,.o,$(SOURCES)))
 
 run: test
 
-# test: TestRunner.o StudentTest1.o StudentTest2.o StudentTest3.o $(OBJECTS)
-# 	$(CXX) $(CXXFLAGS) $^ -o $@
-
-test: TestRunner.o StudentTest1.o $(OBJECTS)
+test: TestRunner.o StudentTest1.o StudentTest2.o StudentTest3.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# test: TestRunner.o StudentTest1.o $(OBJECTS)
+# 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
@@ -32,13 +32,13 @@ $(OBJECT_PATH)/%.o: $(SOURCE_PATH)/%.cpp $(HEADERS)
 StudentTest1.cpp:  
 	curl https://raw.githubusercontent.com/RazGavrieli/Board-Game-Coup/master/Test.cpp > $@
 
-# # Esther Bines
-# StudentTest2.cpp: 
-# 	curl https://raw.githubusercontent.com/Esther-Bi/B-HW4-Test/main/Test.cpp > $@
+# Esther Bines
+StudentTest2.cpp: 
+	curl https://raw.githubusercontent.com/Esther-Bi/B-HW4-Test/main/Test.cpp > $@
 
-# # Benjamin Saldman
-# StudentTest3.cpp: 
-# 	curl https://raw.githubusercontent.com/BenjaminSaldman/coup-a/main/Test.cpp > $@
+# Benjamin Saldman
+StudentTest3.cpp: 
+	curl https://raw.githubusercontent.com/BenjaminSaldman/coup-a/main/Test.cpp > $@
 
 tidy:
 	clang-tidy $(SOURCES) $(TIDY_FLAGS) --
