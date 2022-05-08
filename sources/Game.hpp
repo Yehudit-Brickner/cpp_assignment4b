@@ -46,6 +46,7 @@ namespace coup {
         // return the winners name
         string winner();
 
+        // std::vector<Turn*> t();
 
     };
 }

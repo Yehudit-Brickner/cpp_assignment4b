@@ -15,6 +15,7 @@ Contessa::Contessa(Game & g, string n){
     this->_coins=0;
     this->_role="Contessa";
     this->_state = 0;
+    this->_lastturn="none";
     if (g._player.size()<6){
         g._player.push_back(& *this);
     }

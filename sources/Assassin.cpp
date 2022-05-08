@@ -15,6 +15,7 @@ Assassin::Assassin(Game & g, string n) {
     this->_coins=0;
     this->_role="Assassin";
     this->_state = 0;
+    this->_lastturn="none";
      if (g._player.size()<6){
         g._player.push_back(& *this);
     }
@@ -36,11 +37,17 @@ void Assassin::coup(Player & p){
     if(this->_coins>=7){
         cout<<"Assasin coup7"<<endl;
         this->updateCoins(-7);
-        p.setState(1);
+        p.setState(2);
+        string s= this->getName();
+        s.append(" 0 coup7 ");
+        s.append(p.getName());
+        s.append(" null");
+        this->setLastturn(s);
+
         // vector<Player*> v1={&p};
-        Turn t1{*this, 0,"coup7",p};
+        // Turn t1{*this, 0,"coup7",p};
         // this->_game->gameTurns.push(&t1);
-        this->_game->_gameTurns.push_back(&t1);
+        // this->_game->_gameTurns.push_back(&t1);
         this->_game->updateTurn();     
     }
     if(this->_coins<3){
@@ -49,9 +56,14 @@ void Assassin::coup(Player & p){
     cout<<"Assasin coup3"<<endl;
     this->updateCoins(-3);
     p.setState(1);
+    string s= this->getName();
+    s.append(" 0 coup3 ");
+    s.append(p.getName());
+    s.append(" null");
+    this->setLastturn(s);
     // vector<Player*> v1={&p};
-    Turn t1{*this,0, "coup3",p};
+    // Turn t1{*this,0, "coup3",p};
     // this->_game->gameTurns.push(&t1);
-    this->_game->_gameTurns.push_back(&t1);
+    // this->_game->_gameTurns.push_back(&t1);
     this->_game->updateTurn(); 
 }

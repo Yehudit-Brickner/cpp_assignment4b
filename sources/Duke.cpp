@@ -15,6 +15,7 @@ Duke::Duke(Game & g, string n){
     this->_coins = 0;
     this->_role = "Duke";
     this->_state = 0;
+    this->_lastturn="none";
     if (g._player.size()<6){
         g._player.push_back(& *this);
     }
@@ -27,18 +28,23 @@ string Duke::role(){
 }
 
 void Duke::tax(){
+    const int ten=10; 
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
     }
-    if(this->_coins>=10){
+    if(this->_coins>=ten){
         throw std::invalid_argument( "you have to do coup!" );  
     }
     this->updateCoins(3);
     cout<<"duke took tax"<<endl;
-    Turn t1{*this,0, "tax"};
+    string s= this->getName();
+    s.append(" 0 tax null null");
+    
+    this->setLastturn(s);
+    // Turn t1{*this,0, "tax"};
     // this->_game->gameTurns.push(&t1);
-    this->_game->_gameTurns.push_back(&t1);
+    // this->_game->_gameTurns.push_back(&t1);
     this->_game->updateTurn(); 
 }
 

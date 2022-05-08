@@ -11,12 +11,12 @@ namespace coup {
     class Turn{
         public:
         
-        Player * _whoPlayed;
+        Player& _whoPlayed;
         int coins_stolen;
         string _action;
         // std::vector<Player*> _doneTo;
-        Player * _doneto1;
-        Player * _doneto2;
+        Player&  _doneto1;
+        Player&  _doneto2;
         bool _blocked; 
 
         Turn(Player & p, int c, string s, Player & d1, Player & d2);
@@ -24,12 +24,12 @@ namespace coup {
         Turn(Player & p, int c, string s);
         // Turn(const Turn &o);
         ~Turn(){}
-        Player* getPlayer();
+        Player getPlayer();
         int getCoins_stolen();
         string getAction();
         // std::vector<Player*> getDoneTo();
-        Player* getDoneto1();
-        Player* getDoneto2();
+        Player getDoneto1();
+        Player getDoneto2();
         bool getBlocked();
 
         void setBlocked(bool b);

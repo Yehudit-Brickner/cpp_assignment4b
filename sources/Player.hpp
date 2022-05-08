@@ -19,6 +19,8 @@ namespace coup {
             string _name;
             string _role;
             int _state;
+            // Turn* _lastTurn;
+            string _lastturn;
         
             //constructers
             Player(coup::Game & g, string n);
@@ -36,7 +38,10 @@ namespace coup {
             void virtual coup(Player & p) ;
             void virtual block(Player & p);
             void setState(int s);
+            void setLastturn(string s);
+            string getLastturn();
             void print();
+            bool operator==(const Player & m ) const;
     };
 
 

@@ -14,7 +14,7 @@ using namespace coup;
         std:: vector<string> _p; 
         _turn = 0;
         // queue<Turn> gameTurns;
-        std::vector<Turn*> _gameTurns;
+        // std::vector<Turn*> _gameTurns;
         
         
     }
@@ -59,7 +59,9 @@ using namespace coup;
             if(s==2){
                 int el=this->_turn;
                 this->_player.erase(this->_player.begin() + el);
+                this->_turn=(this->_turn-1)%(int)this->_player.size();
             }
+            // cout<<s<<endl;
         }
 
         // cout<<"state of new player "<<this->_player[(unsigned long)this->_turn]->_state<< endl;
@@ -72,8 +74,13 @@ using namespace coup;
  
     // make a vector of the players name
     std::vector<string> Game::players(){
-        return this->_p;
-
+        std::vector<string> aliveplayers;
+        for (unsigned long i=0;i<this->_player.size();i++){
+            if(this->_player[i]->_state==0){
+                aliveplayers.push_back(this->_player[i]->_name);
+            }
+        }
+        return aliveplayers;
     }
 
     string Game::turn(){
@@ -84,11 +91,16 @@ using namespace coup;
     }
 
     string Game::winner(){
-        // if (this ->_p.size()==1){
-        //     return this->_p[0].getName();
-        // }
-        // else{
-        //     //throw exception
-        // }
-        return "string";
+        cout<<"checking if there is a winner"<<endl;
+        if (this ->_player.size()==1){
+            return this->_player[0]->getName();
+        }
+        else{
+            throw std::invalid_argument( "there is no winner" ); 
+        }
+        // return "string";
     }
+
+    // std::vector<Turn*> Game::t(){
+    //     return this->_gameTurns;
+    // }
