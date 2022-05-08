@@ -1,5 +1,6 @@
 #include "Contessa.hpp"
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 
@@ -10,12 +11,7 @@ using namespace coup;
 
 Contessa::Contessa(Game & g, string n){
     cout<< "this is a constructor for Contessa"<< endl;
-   bool canadd=g._started;
-    // for (unsigned long i=0; i<g._player.size();i++){
-    //     if(g._player[i]->getLastturn()!="none"){
-    //         canadd=false;
-    //     }
-    // }
+    bool canadd=g._started;
     if (g._player.size()<6 && !canadd){
         this->_game=& g;
         this->_name=n;
@@ -37,21 +33,35 @@ string Contessa::role(){
     return this->_role;
 }
 
-// void Contessa::block(coup::Assassin a){
-    
-//     int start=(int)this->_game->_gameTurns.size()-1;
-//     int size=(int)this->_game->_player.size();
-//     int end=start-size;
-//     if(end<0){
-//         end=0;
-//     }
-//     for (unsigned long i=(unsigned long)start; i > (unsigned long)end;i--){
-//         if(this->_game->_gameTurns[i]->getPlayer()==&a and this->_game->_gameTurns[i]->getAction()=="coup3" and this->_game->_gameTurns[i]->getBlocked()==false ){
-//            cout<<"blocked"<<endl;
-//            vector<Player*> p=this->_game->_gameTurns[i]->getDoneTo();
-//            p[0]->setState(0);
-//            this->_game->_gameTurns[i]->setBlocked(true);
-//         } 
-//     }
 
-// }
+void Contessa::block(Player & p){
+    if(p.role()!="Assassin"){
+        throw std::invalid_argument( "this player cant block the other player" );
+    }
+    cout<< "Contessa blocking Assassin"<<endl;
+    for (unsigned long i=0; i<this->_game->_player.size();i++){
+        if (this->_game->_player[i]->getName()==p.getName()){
+            vector<string> str;
+            stringstream s_stream1(this->_game->_player[i]->getLastturn()); //create string stream from the string
+            while(s_stream1.good()) {
+                string substr;
+                getline(s_stream1, substr, ','); //get first string delimited by a space
+                str.push_back(substr);
+            }
+            for (unsigned long a=0; a<str.size();a++){
+                cout<< str[a]<<endl;
+            }
+            if (str[2]=="coup3"){
+                string n1=str[3];
+                for (unsigned long j=0; j<this->_game->_player.size();j++){
+                    if(this->_game->_player[j]->getName()==n1){
+                        this->_game->_player[j]->setState(0); 
+                        return;
+                    }
+                }    
+            }
+        }
+    }
+    throw std::invalid_argument( "can't block!" );
+}
+    

@@ -28,7 +28,7 @@ namespace coup{
        public:
             Contessa(Game & g, string n);      
             ~Contessa(){} 
-            // void block(coup::Assassin a);
+            void block(coup::Player & ) override;
             string role() override;
             
     };

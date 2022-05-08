@@ -1,6 +1,7 @@
 #include "Duke.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -11,11 +12,6 @@ using namespace coup;
 Duke::Duke(Game & g, string n){
     cout<< "this is a constructor for Duke"<< endl;
     bool canadd=g._started;
-    // for (unsigned long i=0; i<g._player.size();i++){
-    //     if(g._player[i]->getLastturn()!="none"){
-    //         canadd=false;
-    //     }
-    // }
     if (g._player.size()<6&& !canadd){
         this->_game = & g;
         this->_name = n;
@@ -53,47 +49,38 @@ void Duke::tax(){
     this->updateCoins(3);
     cout<<"duke took tax"<<endl;
     string s= this->getName();
-    s.append(" 0 tax null null");
+    s.append(",0,tax,null,null");
     
     this->setLastturn(s);
-    // Turn t1{*this,0, "tax"};
-    // this->_game->gameTurns.push(&t1);
-    // this->_game->_gameTurns.push_back(&t1);
     this->_game->updateTurn(); 
 }
 
-
-// void Duke::block(Player pl){
-//     cout<<"enter block"<<endl;
-//     int start=(int)this->_game->_gameTurns.size()-1;
-//     int size=(int)this->_game->_player.size()-1;
-//     int end=start-size;
-//     if(end<0){
-//         end=0;
-//     }
-//     cout<< "start= "<< start<< " end= "<< end <<endl;
-//     unsigned long s =(unsigned long) start;
-//     unsigned long e =(unsigned long) end;
-//     cout<< "s= "<< s<< " e= "<< e <<endl;
-//     for (unsigned long i=s; i >= e; i--){
-//         cout<< "i= "<<i<< endl;
+void Duke::block(Player & p){
+    cout<< "Duke blocking Player"<<endl;
+    for (unsigned long i=0; i<this->_game->_player.size();i++){
+        if (this->_game->_player[i]->getName()==p.getName()){
+            vector<string> str;
+            stringstream s_stream1(this->_game->_player[i]->getLastturn()); //create string stream from the string
+            while(s_stream1.good()) {
+                string substr;
+                getline(s_stream1, substr, ','); //get first string delimited by a space
+                str.push_back(substr);
+            }
+            for (unsigned long a=0; a<str.size();a++){
+                cout<< str[a]<<endl;
+            }
         
-//         // cout<<"who played  "<< (this->_game->_gameTurns[i]->_whoPlayed)<<endl;
-//         cout<<this->_game->_gameTurns[i]->_whoPlayed<<endl;
-//         if(this->_game->_gameTurns[i]->_action=="forign_aid"){
-//             cout<< "correct action"<<endl;
-//             if(this->_game->_gameTurns[i]->_blocked==false){
-//                 cout<< "turn has not been blocked"<<endl;
-//             }
-//         }
+            if (str[2]=="forign_aid"){
+                string n1=str[0];
+                for (unsigned long j=0; j<this->_game->_player.size();j++){ 
+                    if(this->_game->_player[j]->getName()==n1){
+                        this->_game->_player[j]->updateCoins(-2); 
+                        return;  
+                    }
+                }    
+            }
+        }
+    }
+    throw std::invalid_argument( "can't block!" );
+}
 
-//         // if(this->_game->_gameTurns[i]->getPlayer()==&pl && this->_game->_gameTurns[i]->getAction()=="forign_aid" && this->_game->_gameTurns[i]->getBlocked()==false ){
-//         //    cout<<"blocked"<<endl;
-//         //    vector<Player*> p=this->_game->_gameTurns[i]->getDoneTo();
-//         //    cout<< "captain2 has "<< p[0]->coins() << " coins"<<endl;
-//         //    p[0]->updateCoins(-2);
-//         //    cout<< "captain2 has "<< p[0]->coins() << " coins"<<endl;
-
-//         // }
-//     }         
-// }

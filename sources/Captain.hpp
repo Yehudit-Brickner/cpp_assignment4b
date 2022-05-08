@@ -32,8 +32,7 @@ namespace coup{
             Captain(Game & g, string n);
             ~Captain(){}  
             void steal(coup::Player & p);
-            // void block(coup::Captain c);
-            // void block(coup:: Duke d);
+            void block(coup::Player & p)override;
             string role() override;
     };
 }

@@ -68,15 +68,10 @@ void Assassin::coup(Player & p){
         this->updateCoins(-7);
         p.setState(2);
         string s= this->getName();
-        s.append(" 0 coup7 ");
+        s.append(",0,coup7,");
         s.append(p.getName());
-        s.append(" null");
+        s.append(",null");
         this->setLastturn(s);
-
-        // vector<Player*> v1={&p};
-        // Turn t1{*this, 0,"coup7",p};
-        // this->_game->gameTurns.push(&t1);
-        // this->_game->_gameTurns.push_back(&t1);
         this->_game->updateTurn();     
     }
     else{
@@ -87,14 +82,10 @@ void Assassin::coup(Player & p){
     this->updateCoins(-3);
     p.setState(1);
     string s= this->getName();
-    s.append(" 0 coup3 ");
+    s.append(",0,coup3,");
     s.append(p.getName());
-    s.append(" null");
+    s.append(",null");
     this->setLastturn(s);
-    // vector<Player*> v1={&p};
-    // Turn t1{*this,0, "coup3",p};
-    // this->_game->gameTurns.push(&t1);
-    // this->_game->_gameTurns.push_back(&t1);
     this->_game->updateTurn(); 
     }
 }

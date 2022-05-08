@@ -31,7 +31,7 @@ class Duke : public Player {
             Duke(Game & g, string n);
             ~Duke(){} 
             void tax();
-            // void block(coup::Player p) override;
+            void block(coup::Player & p) override;
             string role() override;
     };   
 }

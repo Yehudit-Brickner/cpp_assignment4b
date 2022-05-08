@@ -1,6 +1,7 @@
 #include "Captain.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -11,11 +12,6 @@ using namespace coup;
 Captain::Captain(Game & g, string n){
     cout<< "this is a constructor for Captain"<< endl;
     bool canadd=g._started;
-    // for (unsigned long i=0; i<g._player.size();i++){
-    //     if(g._player[i]->getLastturn()!="none"){
-    //         canadd=false;
-    //     }
-    // }
     if (g._player.size()<6 && !canadd){
         this->_game=& g;
         this->_name=n;
@@ -55,9 +51,9 @@ void Captain::steal(coup::Player & p){
         p.updateCoins(-2);
         this->updateCoins(2);
         string s= this->getName();
-        s.append(" 2 steal ");
+        s.append(",2,steal,");
         s.append(p.getName());
-        s.append(" null");
+        s.append(",null");
         this->setLastturn(s);
         this->_game->updateTurn(); 
     }
@@ -65,51 +61,51 @@ void Captain::steal(coup::Player & p){
         p.updateCoins(-1);
         this->updateCoins(1);
         string s= this->getName();
-        s.append(" 1 steal ");
+        s.append(",1,steal,");
         s.append(p.getName());
-        s.append(" null");
+        s.append(",null");
         this->setLastturn(s);
         this->_game->updateTurn();
     }
     else{
        throw std::invalid_argument( "no coins to steal" );  
-    }
-    
-    // vector<Player*> v1={&p};
-    // Turn t1{*this,2, "steal",p};
-    // this->_game->gameTurns.push(&t1);
-    // this->_game->_gameTurns.push_back(&t1);
-    
+    }  
 }
 
 
-// void Captain::block(coup::Captain c){
-//     int start=(int)this->_game->_gameTurns.size()-1;
-//     int size=(int)this->_game->_player.size();
-//     int end=start-size;
-//     if(end<0){
-//         end=0;
-//     }
-//     for (unsigned long i=(unsigned long)start; i > (unsigned long) end;i--){
-//         if(this->_game->_gameTurns[i]->getPlayer()==&c and this->_game->_gameTurns[i]->getAction()=="steal" and this->_game->_gameTurns[i]->getBlocked()==false ){
-//            cout<<"blocked"<<endl;
-//            vector<Player*> p=this->_game->_gameTurns[i]->getDoneTo();
-//            p[0]->updateCoins(2);
-//            c.updateCoins(-2);
-//            this->_game->_gameTurns[i]->setBlocked(true);
-//         }
-//     }
-// }
 
-// void Captain::block(coup::Duke d){
-//     cout<<"blocked"<<endl;
-//     // unsigned long start=this->_game->_gameTurns.size()-1;
-//     // unsigned long size=this->_game->_player.size();
-//     // for (unsigned long i=start; i > start-size;i--){
-//     //     if(this->_game->_gameTurns[i].getPlayer()==&d and this->_game->_gameTurns[i].getAction()=="foreign_aid" and this->_game->_gameTurns[i].getBlocked()==false ){
-//     //        cout<<"blocked"<<endl;
-//     //        vector<Player*> p=this->_game->_gameTurns[i].getDoneTo();
-//     //        p[0]->updateCoins(-2);
-//     //     }
-//     // }
-// }
+void Captain::block(Player & p){
+    if(p.role()!="Captain"){
+        throw std::invalid_argument( "this player cant block the other player" );
+    }
+    cout<< "someone played block \n"<< endl;
+    cout<< "Captain blocking Captain"<<endl;
+    for (unsigned long i=0; i<this->_game->_player.size();i++){
+        if (this->_game->_player[i]->getName()==p.getName()){
+            // cout<<"match?"<<endl;
+            vector<string> str;
+            stringstream s_stream1(this->_game->_player[i]->getLastturn()); //create string stream from the string
+            while(s_stream1.good()) {
+                string substr;
+                getline(s_stream1, substr, ','); //get first string delimited by a space
+                str.push_back(substr);
+            }
+            for (unsigned long a=0; a<str.size();a++){
+                cout<< str[a]<<endl;
+            }
+            if (str[2]=="steal"){
+                string n1=str[3];
+                int change=stoi(str[1]);
+                for (unsigned long j=0; j<this->_game->_player.size();j++){
+                    if(this->_game->_player[j]->getName()==n1){
+                        this->_game->_player[j]->updateCoins(change); 
+                        p.updateCoins(-change);
+                        return; 
+                    }
+                }    
+            }
+        }
+    }
+    throw std::invalid_argument( "can't block!" );
+}
+    

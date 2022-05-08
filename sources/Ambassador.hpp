@@ -33,7 +33,7 @@ namespace coup{
         public: 
             Ambassador(Game & g, string n);
             ~Ambassador(){}              
-            // void block(coup::Captain c);
+            void block(Player & p) override;
             void transfer(coup::Player & p1, coup::Player & p2);
             string role() override;
     
