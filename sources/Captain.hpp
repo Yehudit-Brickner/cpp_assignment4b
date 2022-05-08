@@ -31,7 +31,7 @@ namespace coup{
         public:
             Captain(Game & g, string n);
             ~Captain(){}  
-            void steal(coup::Player p);
+            void steal(coup::Player & p);
             // void block(coup::Captain c);
             // void block(coup:: Duke d);
             string role() override;

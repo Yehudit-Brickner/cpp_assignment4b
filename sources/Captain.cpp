@@ -26,8 +26,10 @@ string Captain::role(){
     return this->_role;
 }
 
-void Captain::steal(coup::Player p){
+void Captain::steal(coup::Player & p){
     const int ten=10; 
+    const int two=2;
+    const int one=1;
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
@@ -35,18 +37,35 @@ void Captain::steal(coup::Player p){
     if(this->_coins>=ten){
         throw std::invalid_argument( "you have to do coup!" );  
     }
-    p.updateCoins(-2);
-    this->updateCoins(2);
-    string s= this->getName();
-    s.append(" 2 steal ");
-    s.append(p.getName());
-    s.append(" null");
-    this->setLastturn(s);
+    if(p.coins()>=two){
+        p.updateCoins(-2);
+        this->updateCoins(2);
+        string s= this->getName();
+        s.append(" 2 steal ");
+        s.append(p.getName());
+        s.append(" null");
+        this->setLastturn(s);
+        this->_game->updateTurn(); 
+    }
+    else if(p.coins()==one){
+        p.updateCoins(-1);
+        this->updateCoins(1);
+        string s= this->getName();
+        s.append(" 1 steal ");
+        s.append(p.getName());
+        s.append(" null");
+        this->setLastturn(s);
+        this->_game->updateTurn();
+    }
+    else{
+       throw std::invalid_argument( "no coins to steal" );  
+    }
+    
     // vector<Player*> v1={&p};
     // Turn t1{*this,2, "steal",p};
     // this->_game->gameTurns.push(&t1);
     // this->_game->_gameTurns.push_back(&t1);
-    this->_game->updateTurn(); 
+    
 }
 
 

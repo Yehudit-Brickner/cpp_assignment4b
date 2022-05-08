@@ -30,6 +30,7 @@ string Ambassador::role(){
 
 void Ambassador::transfer(coup::Player p1, coup::Player p2){
     const int ten=10; 
+    const int one=1;
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
@@ -37,19 +38,24 @@ void Ambassador::transfer(coup::Player p1, coup::Player p2){
     if(this->_coins>=ten){
         throw std::invalid_argument( "you have to do coup!" );  
     }
-    p1.updateCoins(-1);
-    p2.updateCoins(1);
-    string s= this->getName();
-    s.append(" 0 transfer ");
-    s.append(p1.getName());
-    s.append(" ");
-    s.append(p2.getName());
-    this->setLastturn(s);
-    // vector<Player*> v1={&p1,&p2};
-    // Turn t1{*this, 1,"transfer",p1,p2};
-    // this->_game->gameTurns.push(&t1);
-    // this->_game->_gameTurns.push_back(&t1);
-    this->_game->updateTurn(); 
+    if(p1.coins()>=one){
+        p1.updateCoins(-1);
+        p2.updateCoins(1);
+        string s= this->getName();
+        s.append(" 0 transfer ");
+        s.append(p1.getName());
+        s.append(" ");
+        s.append(p2.getName());
+        this->setLastturn(s);
+        // vector<Player*> v1={&p1,&p2};
+        // Turn t1{*this, 1,"transfer",p1,p2};
+        // this->_game->gameTurns.push(&t1);
+        // this->_game->_gameTurns.push_back(&t1);
+        this->_game->updateTurn(); 
+    }
+    else{
+       throw std::invalid_argument( "not enough coins to transfer" );  
+    }
 }
 
 // void Ambassador::block(coup::Captain c){

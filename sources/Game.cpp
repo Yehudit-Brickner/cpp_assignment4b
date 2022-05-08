@@ -54,7 +54,10 @@ using namespace coup;
             this->_turn=(this->_turn+1)%(int)this->_player.size();
             s=this->_player[(unsigned long)this->_turn]->_state;
             if(s==1){
-                this->_player[(unsigned long)this->_turn]->setState(2);
+                // this->_player[(unsigned long)this->_turn]->setState(2);
+                int el=this->_turn;
+                this->_player.erase(this->_player.begin() + el);
+                this->_turn=(this->_turn-1)%(int)this->_player.size();
             }
             if(s==2){
                 int el=this->_turn;
