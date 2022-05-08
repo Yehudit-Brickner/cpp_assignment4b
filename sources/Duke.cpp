@@ -15,7 +15,7 @@ Duke::Duke(Game & g, string  n){
     bool canadd=g._started;
     if (g._player.size()<six && !canadd){
         this->_game = & g;
-        this->_name = n;
+        this->_name = std::move(n);
         this->_coins = 0;
         this->_role = "Duke";
         this->_state = 0;

@@ -19,6 +19,7 @@ Player::Player(Game & g, string  n){
         this->_coins=0;
         this->_role="Player";
         this->_lastturn="none";
+        this->_state=0;
         g._player.push_back(& *this);
     }
     else{
@@ -28,7 +29,11 @@ Player::Player(Game & g, string  n){
 }
 
 Player::Player(){
-  
+    
+        this->_coins=0;
+        this->_role="Player";
+        this->_lastturn="none";
+        this->_state=0;
 }
 
 string Player::getName() const{
@@ -54,7 +59,7 @@ void Player::setState(int s){
 }
 
 void Player::setLastturn(string s){
-    this->_lastturn=s;
+    this->_lastturn=std::move(s);
 }
 
 string Player::getLastturn()const{
