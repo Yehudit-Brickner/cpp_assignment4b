@@ -11,7 +11,7 @@ using namespace coup;
 
 Contessa::Contessa(Game & g, string n){
     const int six=6;
-    cout<< "this is a constructor for Contessa"<< endl;
+    // cout<< "this is a constructor for Contessa"<< endl;
     bool canadd=g._started;
     if (g._player.size()<six && !canadd){
         this->_game=& g;
@@ -20,7 +20,6 @@ Contessa::Contessa(Game & g, string n){
         this->_role="Contessa";
         this->_state = 0;
         this->_lastturn="none";
-        // g.addplayer(n);
         g._player.push_back(& *this);
     }
     else{
@@ -39,7 +38,7 @@ void Contessa::block(Player & p){
     if(p.role()!="Assassin"){
         throw std::invalid_argument( "this player cant block the other player" );
     }
-    cout<< "Contessa blocking Assassin"<<endl;
+    // cout<< "Contessa blocking Assassin"<<endl;
     for (unsigned long i=0; i<this->_game->_player.size();i++){
         if (this->_game->_player[i]->getName()==p.getName()){
             vector<string> str;
@@ -48,9 +47,6 @@ void Contessa::block(Player & p){
                 string substr;
                 getline(s_stream1, substr, ','); //get first string delimited by a space
                 str.push_back(substr);
-            }
-            for (unsigned long a=0; a<str.size();a++){
-                cout<< str[a]<<endl;
             }
             if (str[2]=="coup3"){
                 string n1=str[3];

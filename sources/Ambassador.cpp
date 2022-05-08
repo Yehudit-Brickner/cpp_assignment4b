@@ -12,17 +12,16 @@ using namespace coup;
 
 Ambassador::Ambassador(Game & g, string  n){
     const int six=6;
-    cout<< "this is a constructor for Ambassador"<< endl;
+    // cout<< "this is a constructor for Ambassador"<< endl;
     bool canadd=g._started;
     if (g._player.size()< six && !canadd){
         this->_game= & g;
-        this->_name=n;
+        this->_name=std::move(n);
         this->_coins=0;
         this->_role="Ambassador";
         this->_state = 0;
         this->_lastturn="none";
         g._player.push_back(& *this);
-        // g.addplayer(n);
     }
     else{
        throw std::invalid_argument( "too many players!" );  
@@ -67,11 +66,11 @@ void Ambassador::transfer(coup::Player& p1, coup::Player &p2){
 
 
 void Ambassador::block(Player & p){
-    cout<<"p.role="<<p.role()<<endl;
+   
     if(p.role()!="Captain"){
          throw std::invalid_argument( "this player cant block the other player" );
     }
-    cout<< "Ambassador blocking Captain"<<endl;
+    // cout<< "Ambassador blocking Captain"<<endl;
     for (unsigned long i=0; i<this->_game->_player.size();i++){
         if (this->_game->_player[i]->getName()==p.getName()){
             vector<string> str;
@@ -80,11 +79,7 @@ void Ambassador::block(Player & p){
                 string substr;
                 getline(s_stream1, substr, ','); //get first string delimited by a space
                 str.push_back(substr);
-            }
-            for (unsigned long a=0; a<str.size();a++){
-                cout<< str[a]<<endl;
-            }
-            
+            }            
             if (str[2]=="steal"){
                 string n1=str[3];
                 int change=stoi(str[1]);

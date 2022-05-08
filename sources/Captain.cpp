@@ -11,7 +11,7 @@ using namespace coup;
 
 Captain::Captain(Game & g, string  n){
     const int six=6;
-    cout<< "this is a constructor for Captain"<< endl;
+    // cout<< "this is a constructor for Captain"<< endl;
     bool canadd=g._started;
     if (g._player.size()<six && !canadd){
         this->_game=& g;
@@ -21,7 +21,6 @@ Captain::Captain(Game & g, string  n){
         this->_state = 0;
         this->_lastturn="none";
         g._player.push_back(& *this);
-        // g.addplayer(n);
     }
     else{
        throw std::invalid_argument( "too many players!" );  
@@ -79,20 +78,16 @@ void Captain::block(Player & p){
     if(p.role()!="Captain"){
         throw std::invalid_argument( "this player cant block the other player" );
     }
-    cout<< "someone played block \n"<< endl;
-    cout<< "Captain blocking Captain"<<endl;
+    // cout<< "someone played block \n"<< endl;
+    // cout<< "Captain blocking Captain"<<endl;
     for (unsigned long i=0; i<this->_game->_player.size();i++){
         if (this->_game->_player[i]->getName()==p.getName()){
-            // cout<<"match?"<<endl;
             vector<string> str;
             stringstream s_stream1(this->_game->_player[i]->getLastturn()); //create string stream from the string
             while(s_stream1.good()) {
                 string substr;
                 getline(s_stream1, substr, ','); //get first string delimited by a space
                 str.push_back(substr);
-            }
-            for (unsigned long a=0; a<str.size();a++){
-                cout<< str[a]<<endl;
             }
             if (str[2]=="steal"){
                 string n1=str[3];

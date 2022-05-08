@@ -11,7 +11,7 @@ using namespace coup;
 
 Duke::Duke(Game & g, string  n){
     const int six=6;
-    cout<< "this is a constructor for Duke"<< endl;
+    // cout<< "this is a constructor for Duke"<< endl;
     bool canadd=g._started;
     if (g._player.size()<six && !canadd){
         this->_game = & g;
@@ -21,7 +21,6 @@ Duke::Duke(Game & g, string  n){
         this->_state = 0;
         this->_lastturn="none";
         g._player.push_back(& *this);
-        // g.addplayer(n);
     }
     else{
        throw std::invalid_argument( "too many players!" );  
@@ -48,7 +47,7 @@ void Duke::tax(){
     }
     this->_game->_started=true;
     this->updateCoins(3);
-    cout<<"duke took tax"<<endl;
+    // cout<<"duke took tax"<<endl;
     string s= this->getName();
     s.append(",0,tax,null,null");
     
@@ -57,7 +56,7 @@ void Duke::tax(){
 }
 
 void Duke::block(Player & p){
-    cout<< "Duke blocking Player"<<endl;
+    // cout<< "Duke blocking Player"<<endl;
     for (unsigned long i=0; i<this->_game->_player.size();i++){
         if (this->_game->_player[i]->getName()==p.getName()){
             vector<string> str;
@@ -66,11 +65,7 @@ void Duke::block(Player & p){
                 string substr;
                 getline(s_stream1, substr, ','); //get first string delimited by a space
                 str.push_back(substr);
-            }
-            for (unsigned long a=0; a<str.size();a++){
-                cout<< str[a]<<endl;
-            }
-        
+            }        
             if (str[2]=="forign_aid"){
                 string n1=str[0];
                 for (unsigned long j=0; j<this->_game->_player.size();j++){ 

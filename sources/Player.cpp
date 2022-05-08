@@ -11,15 +11,14 @@ using namespace coup;
 
 Player::Player(Game & g, string  n){
     const int six=6;
-    cout<< "this is a constructor for player"<< endl;
+    // cout<< "this is a constructor for player"<< endl;
     bool canadd=g._started;
     if (g._player.size()<six && !canadd){
         this->_game=& g;
-        this->_name=n;
+        this->_name=std::move(n);
         this->_coins=0;
         this->_role="Player";
         this->_lastturn="none";
-        // g.addplayer(n);
         g._player.push_back(& *this);
     }
     else{
@@ -102,9 +101,9 @@ void Player::foreign_aid(){
       throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
     this->_game->_started=true;
-    cout<<"forign_aid"<<endl;
+    // cout<<"forign_aid"<<endl;
     updateCoins(2);
-    cout<<"added 2 coins"<<endl;
+    // cout<<"added 2 coins"<<endl;
     string s= this->getName();
    
     s.append(",0,forign_aid,null,null");
@@ -136,7 +135,6 @@ void Player::coup(coup::Player & p){
       throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
     this->_game->_started=true;
-
     vector<string>play=this->_game->players();
     bool found=false;
     for (unsigned long i=0; i<play.size();i++){
@@ -147,16 +145,11 @@ void Player::coup(coup::Player & p){
     if( !found){
        throw std::invalid_argument( "player not in game" ); 
     }
-
-    // cout << "a player is trying to coup. the player has " << this->_coins << " coins"<<endl;
-   
-
     if (this->_coins<seven){
         throw std::invalid_argument( "cant pay 7 coins" );  
     }
-
     p.setState(2);
-    cout<<"the assigned player state is "<< p._state <<endl;
+    // cout<<"the assigned player state is "<< p._state <<endl;
     string s= this->getName();
     s.append(",0,coup7,");
     s.append(p.getName());

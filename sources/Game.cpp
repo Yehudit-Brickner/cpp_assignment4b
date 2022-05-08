@@ -11,31 +11,11 @@ using namespace coup;
 
     Game::Game(){
         std:: vector<coup::Player*> _player;
-        // std:: vector<string> _p; 
         _turn = 0;
         _started=false;
         
         
     }
-
-    // void Game::print(){
-    //     for (unsigned long i=0; i<this->_p.size();i++){
-    //         cout<< _p[i]<< "   "<< endl;
-    //     }
-    //     cout << " "<<endl;
-    // }
-
-
-
-    // void Game::addplayer(string const s){
-    //     int const max_player=6;
-    //     if(_p.size()<max_player){
-    //         _p.push_back(s);
-    //     }
-    // }
-
-
-   
 
 
     void Game::updateTurn(){    
@@ -72,10 +52,9 @@ using namespace coup;
     }
 
     string Game::turn(){
-        int t=this->_turn;
-        unsigned long tu=(unsigned long)this->_turn;
+        unsigned long t=(unsigned long)this->_turn;
         vector<string> p=this->players();
-        return p[tu];        
+        return p[t];        
     }
 
     string Game::winner(){
