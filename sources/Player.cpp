@@ -10,15 +10,10 @@ using namespace std;
 using namespace coup;
 
 Player::Player(Game & g, string n){
+    const int six=6;
     cout<< "this is a constructor for player"<< endl;
-    // bool canadd=true;
-    // for (unsigned long i=0; i<g._player.size();i++){
-    //     if(g._player[i]->getLastturn()!="none"){
-    //         canadd=false;
-    //     }
-    // }
     bool canadd=g._started;
-    if (g._player.size()<6 && !canadd){
+    if (g._player.size()<six && !canadd){
         this->_game=& g;
         this->_name=n;
         this->_coins=0;
@@ -256,8 +251,8 @@ string Player::role(){
 
 
 void Player::coup(coup::Player & p){
-    const int  money1=7;
-    const int money2=3;
+    const int  seven=7;
+    const int three=3;
     const int one=1;
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
@@ -282,7 +277,7 @@ void Player::coup(coup::Player & p){
     // cout << "a player is trying to coup. the player has " << this->_coins << " coins"<<endl;
    
 
-    if (this->_coins<money1){
+    if (this->_coins<seven){
         throw std::invalid_argument( "cant pay 7 coins" );  
     }
 
@@ -293,7 +288,7 @@ void Player::coup(coup::Player & p){
     s.append(p.getName());
     s.append(",null");
     this->setLastturn(s);
-    this->updateCoins(-7);
+    this->updateCoins(-seven);
     this->_game->updateTurn(); 
     }
 

@@ -10,9 +10,10 @@ using namespace coup;
 
 
 Duke::Duke(Game & g, string n){
+    const int six=6;
     cout<< "this is a constructor for Duke"<< endl;
     bool canadd=g._started;
-    if (g._player.size()<6&& !canadd){
+    if (g._player.size()<six && !canadd){
         this->_game = & g;
         this->_name = n;
         this->_coins = 0;
