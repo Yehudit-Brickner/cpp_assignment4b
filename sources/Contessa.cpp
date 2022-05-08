@@ -10,7 +10,13 @@ using namespace coup;
 
 Contessa::Contessa(Game & g, string n){
     cout<< "this is a constructor for Contessa"<< endl;
-    if (g._player.size()<6){
+   bool canadd=g._started;
+    // for (unsigned long i=0; i<g._player.size();i++){
+    //     if(g._player[i]->getLastturn()!="none"){
+    //         canadd=false;
+    //     }
+    // }
+    if (g._player.size()<6 && !canadd){
         this->_game=& g;
         this->_name=n;
         this->_coins=0;

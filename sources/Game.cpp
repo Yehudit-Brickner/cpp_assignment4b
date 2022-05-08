@@ -13,6 +13,7 @@ using namespace coup;
         std:: vector<coup::Player*> _player;
         std:: vector<string> _p; 
         _turn = 0;
+        _started=false;
         // queue<Turn> gameTurns;
         // std::vector<Turn*> _gameTurns;
         
@@ -95,7 +96,8 @@ using namespace coup;
 
     string Game::winner(){
         cout<<"checking if there is a winner"<<endl;
-        if (this ->_player.size()==1){
+        
+        if (this ->_player.size()==1 && this->_started){
             return this->_player[0]->getName();
         }
         else{

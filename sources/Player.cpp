@@ -11,7 +11,14 @@ using namespace coup;
 
 Player::Player(Game & g, string n){
     cout<< "this is a constructor for player"<< endl;
-    if (g._player.size()<6){
+    // bool canadd=true;
+    // for (unsigned long i=0; i<g._player.size();i++){
+    //     if(g._player[i]->getLastturn()!="none"){
+    //         canadd=false;
+    //     }
+    // }
+    bool canadd=g._started;
+    if (g._player.size()<6 && !canadd){
         this->_game=& g;
         this->_name=n;
         this->_coins=0;
@@ -78,7 +85,7 @@ void Player::income(){
     if(this->_game->_player.size()<=one){
       throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
-
+    this->_game->_started=true;
     // cout<<"income"<<endl;
     updateCoins(1);
     string s= this->getName();
@@ -104,7 +111,7 @@ void Player::foreign_aid(){
     if(this->_game->_player.size()<=one){
       throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
-    
+    this->_game->_started=true;
     cout<<"forign_aid"<<endl;
     updateCoins(2);
     cout<<"added 2 coins"<<endl;
@@ -285,6 +292,7 @@ string Player::role(){
 
 
 void Player::coup(coup::Player & p){
+    this->_game->_started=true;
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
@@ -361,6 +369,6 @@ void Player::coup(coup::Player & p){
 // }
 
 
-bool Player::operator== (const Player & p )const{
-    return (this->_name==p._name && this->_role==p._role);
-}
+// bool Player::operator== (const Player & p )const{
+//     return (this->_name==p._name && this->_role==p._role);
+// }

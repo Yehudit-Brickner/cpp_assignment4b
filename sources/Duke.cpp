@@ -10,7 +10,13 @@ using namespace coup;
 
 Duke::Duke(Game & g, string n){
     cout<< "this is a constructor for Duke"<< endl;
-    if (g._player.size()<6){
+    bool canadd=g._started;
+    // for (unsigned long i=0; i<g._player.size();i++){
+    //     if(g._player[i]->getLastturn()!="none"){
+    //         canadd=false;
+    //     }
+    // }
+    if (g._player.size()<6&& !canadd){
         this->_game = & g;
         this->_name = n;
         this->_coins = 0;
@@ -43,6 +49,7 @@ void Duke::tax(){
     if(this->_game->_player.size()<=one){
       throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
+    this->_game->_started=true;
     this->updateCoins(3);
     cout<<"duke took tax"<<endl;
     string s= this->getName();

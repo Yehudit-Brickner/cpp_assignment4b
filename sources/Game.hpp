@@ -21,6 +21,7 @@ namespace coup {
         std:: vector<coup::Player*> _player;
         std:: vector<string> _p;
         int _turn;
+        bool _started;
         // queue<Turn> gameTurns;
         std:: vector<coup::Turn*>_gameTurns;
 
