@@ -108,8 +108,7 @@ void Player::foreign_aid(){
 
 
 void Player::block(coup::Player & p){
-    // will need a queue to hold the last full turns of things to know what to block and how to rool back
-
+    
     cout<< "someone played block \n"<< endl;
     if( this->role()=="Contessa" && p.role()=="Assassin"){
         cout<< "Contessa blocking Assassin"<<endl;
@@ -278,6 +277,17 @@ void Player::coup(coup::Player & p){
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
     }
+    vector<string>play=this->_game->players();
+    bool found=false;
+    for (unsigned long i=0; i<play.size();i++){
+        if(play[i]==p.getName()){
+            found=true;
+        }
+    }
+    if( found==false){
+       throw std::invalid_argument( "player not in game" ); 
+    }
+
     cout << "a player is trying to coup. the player has " << this->_coins << " coins"<<endl;
     const int  money1=7;
     const int money2=3;

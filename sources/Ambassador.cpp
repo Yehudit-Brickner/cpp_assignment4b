@@ -28,7 +28,7 @@ string Ambassador::role(){
 }
 
 
-void Ambassador::transfer(coup::Player p1, coup::Player p2){
+void Ambassador::transfer(coup::Player& p1, coup::Player &p2){
     const int ten=10; 
     const int one=1;
     unsigned long turnn=(unsigned long)this->_game->_turn;

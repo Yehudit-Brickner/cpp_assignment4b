@@ -30,11 +30,24 @@ string Assassin::role(){
 
 
 void Assassin::coup(Player & p){
+
+    const int seven=7;
+    const int three=3;
     unsigned long turnn=(unsigned long)this->_game->_turn;
     if(this->_game->_player[turnn]!=this){
          throw std::invalid_argument( "not your turn!" ); 
     }
-    if(this->_coins>=7){
+    vector<string>play=this->_game->players();
+    bool found=false;
+    for (unsigned long i=0; i<play.size();i++){
+        if(play[i]==p.getName()){
+            found=true;
+        }
+    }
+    if( found==false){
+       throw std::invalid_argument( "player not in game" ); 
+    }
+    if(this->_coins>=seven){
         cout<<"Assasin coup7"<<endl;
         this->updateCoins(-7);
         p.setState(2);
@@ -50,7 +63,7 @@ void Assassin::coup(Player & p){
         // this->_game->_gameTurns.push_back(&t1);
         this->_game->updateTurn();     
     }
-    if(this->_coins<3){
+    if(this->_coins<three){
          throw std::invalid_argument( "cant pay 3 coins" ); 
     }
     cout<<"Assasin coup3"<<endl;
