@@ -9,7 +9,7 @@ using namespace std;
 
 using namespace coup;
 
-Player::Player(Game & g, string n){
+Player::Player(Game & g, string  n){
     const int six=6;
     cout<< "this is a constructor for player"<< endl;
     bool canadd=g._started;
@@ -19,7 +19,7 @@ Player::Player(Game & g, string n){
         this->_coins=0;
         this->_role="Player";
         this->_lastturn="none";
-        g.addplayer(n);
+        // g.addplayer(n);
         g._player.push_back(& *this);
     }
     else{
@@ -32,11 +32,11 @@ Player::Player(){
   
 }
 
-string Player::getName(){
+string Player::getName() const{
     return this->_name;
 }
 
-int  Player::getCoins(){
+int  Player::getCoins()const{
     return this->_coins;
 }
 
@@ -46,7 +46,7 @@ void Player::updateCoins(int u){
     this->_coins=num;
 }
 
-int Player::coins(){
+int Player::coins()const{
     return this->_coins;
 }
 
@@ -58,7 +58,7 @@ void Player::setLastturn(string s){
     this->_lastturn=s;
 }
 
-string Player::getLastturn(){
+string Player::getLastturn()const{
     return this->_lastturn;
 }
 
@@ -114,132 +114,6 @@ void Player::foreign_aid(){
 
 
 void Player::block(coup::Player & p){
-
-    /*
-    // cout<< "someone played block \n"<< endl;
-    // if( this->role()=="Contessa" && p.role()=="Assassin"){
-    //     cout<< "Contessa blocking Assassin"<<endl;
-    //     for (unsigned long i=0; i<this->_game->_player.size();i++){
-    //         if (this->_game->_player[i]->getName()==p.getName()){
-    //             cout<<"match?"<<endl;
-    //             vector<string> str;
-    //             stringstream s_stream1(this->_game->_player[i]->getLastturn()); //create string stream from the string
-    //             while(s_stream1.good()) {
-    //                 string substr;
-    //                 getline(s_stream1, substr, ','); //get first string delimited by a space
-    //                 str.push_back(substr);
-    //             }
-    //             // for (unsigned long a=0; a<str.size();a++){
-    //             //     cout<< str[a]<<endl;
-    //             // }
-    //             for (unsigned long b=0; b<str.size();b++){
-    //                 if (str[b]=="coup3"){
-    //                     for (unsigned long j=0; j<this->_game->_player.size();j++){
-    //                         string n1=str[b+1];
-    //                         string n2=str[b+1]+" "+str[b+2];
-    //                         if(this->_game->_player[j]->getName()==n1 || this->_game->_player[j]->getName()==n2){
-    //                             this->_game->_player[j]->setState(0); 
-    //                             return;
-    //                         }
-    //                     }    
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    // if(this->role()=="Ambassador" && p.role()=="Captain"){
-    //      cout<< "Ambassador blocking Captain"<<endl;
-    //     for (unsigned long i=0; i<this->_game->_player.size();i++){
-    //         if (this->_game->_player[i]->getName()==p.getName()){
-    //             cout<<"match?"<<endl;
-    //             vector<string> str;
-    //             stringstream s_stream1(this->_game->_player[i]->getLastturn()); //create string stream from the string
-    //             while(s_stream1.good()) {
-    //                 string substr;
-    //                 getline(s_stream1, substr, ','); //get first string delimited by a space
-    //                 str.push_back(substr);
-    //             }
-    //             // for (unsigned long a=0; a<str.size();a++){
-    //             //     cout<< str[a]<<endl;
-    //             // }
-    //             for (unsigned long b=0; b<str.size();b++){
-    //                 if (str[b]=="steal"){
-    //                     for (unsigned long j=0; j<this->_game->_player.size();j++){
-    //                         string n1=str[b+1];
-    //                         string n2=str[b+1]+" "+str[b+2];
-    //                         if(this->_game->_player[j]->getName()==n1 || this->_game->_player[j]->getName()==n2){
-    //                             this->_game->_player[j]->updateCoins(2); 
-    //                             p.updateCoins(-2);
-    //                             return;
-    //                         }
-    //                     }    
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    // else if(this->role()=="Captain" && p.role()=="Captain"){
-    //      cout<< "Captain blocking Captain"<<endl;
-    //     for (unsigned long i=0; i<this->_game->_player.size();i++){
-    //         if (this->_game->_player[i]->getName()==p.getName()){
-    //             cout<<"match?"<<endl;
-    //             vector<string> str;
-    //             stringstream s_stream1(this->_game->_player[i]->getLastturn()); //create string stream from the string
-    //             while(s_stream1.good()) {
-    //                 string substr;
-    //                 getline(s_stream1, substr, ','); //get first string delimited by a space
-    //                 str.push_back(substr);
-    //             }
-    //             // for (unsigned long a=0; a<str.size();a++){
-    //             //     cout<< str[a]<<endl;
-    //             // }
-    //             for (unsigned long b=0; b<str.size();b++){
-    //                 if (str[b]=="steal"){
-    //                     for (unsigned long j=0; j<this->_game->_player.size();j++){
-    //                         string n1=str[b+1];
-    //                         string n2=str[b+1]+" "+str[b+2];
-    //                         if(this->_game->_player[j]->getName()==n1 || this->_game->_player[j]->getName()==n2){
-    //                             this->_game->_player[j]->updateCoins(2); 
-    //                             p.updateCoins(-2);
-    //                             return;
-    //                         }
-    //                     }    
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    // else if(this->role()=="Duke" ){
-    //     cout<< "Duke blocking Player"<<endl;
-    //     for (unsigned long i=0; i<this->_game->_player.size();i++){
-    //         if (this->_game->_player[i]->getName()==p.getName()){
-    //             cout<<"match?"<<endl;
-    //             vector<string> str;
-    //             stringstream s_stream1(this->_game->_player[i]->getLastturn()); //create string stream from the string
-    //             while(s_stream1.good()) {
-    //                 string substr;
-    //                 getline(s_stream1, substr, ','); //get first string delimited by a space
-    //                 str.push_back(substr);
-    //             }
-    //             // for (unsigned long a=0; a<str.size();a++){
-    //             //     cout<< str[a]<<endl;
-    //             // }
-    //             for (unsigned long b=0; b<str.size();b++){
-    //                 if (str[b]=="forign_aid"){
-    //                     for (unsigned long j=0; j<this->_game->_player.size();j++){
-    //                         string n1=str[0];
-    //                         string n2=str[0]+" "+str[1];
-    //                         if(this->_game->_player[j]->getName()==n1 || this->_game->_player[j]->getName()==n2){
-    //                             this->_game->_player[j]->updateCoins(-2); 
-    //                             return;  
-    //                         }
-    //                     }    
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-   */
     throw std::invalid_argument( "this player cant block the other player" );     
 }
 
@@ -270,7 +144,7 @@ void Player::coup(coup::Player & p){
             found=true;
         }
     }
-    if( found==false){
+    if( !found){
        throw std::invalid_argument( "player not in game" ); 
     }
 

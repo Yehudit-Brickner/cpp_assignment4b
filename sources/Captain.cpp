@@ -9,7 +9,7 @@ using namespace std;
 using namespace coup;
 
 
-Captain::Captain(Game & g, string n){
+Captain::Captain(Game & g, string  n){
     const int six=6;
     cout<< "this is a constructor for Captain"<< endl;
     bool canadd=g._started;
@@ -21,7 +21,7 @@ Captain::Captain(Game & g, string n){
         this->_state = 0;
         this->_lastturn="none";
         g._player.push_back(& *this);
-        g.addplayer(n);
+        // g.addplayer(n);
     }
     else{
        throw std::invalid_argument( "too many players!" );  

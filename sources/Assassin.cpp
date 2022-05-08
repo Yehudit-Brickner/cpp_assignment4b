@@ -8,7 +8,7 @@ using namespace std;
 using namespace coup;
 
 
-Assassin::Assassin(Game & g, string n) {
+Assassin::Assassin(Game & g, string  n) {
     const int six=6;
     cout<< "this is a constructor for Assassin"<< endl;
     bool canadd=g._started;
@@ -20,7 +20,7 @@ Assassin::Assassin(Game & g, string n) {
         this->_state = 0;
         this->_lastturn="none";
         g._player.push_back(& *this);
-        g.addplayer(n);
+        // g.addplayer(n);
     }
     else{
        throw std::invalid_argument( "too many players!" );  
@@ -56,7 +56,7 @@ void Assassin::coup(Player & p){
             found=true;
         }
     }
-    if( found==false){
+    if( !found){
        throw std::invalid_argument( "player not in game" ); 
     }
     if(this->_coins>=seven){

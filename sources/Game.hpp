@@ -1,7 +1,6 @@
 
 #pragma once
 #include "Player.hpp"
-#include "Turn.hpp"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -13,7 +12,6 @@ using namespace std;
 
 namespace coup {
     class Player;
-    class Turn;
     class Game {
         
 
@@ -22,8 +20,6 @@ namespace coup {
         std:: vector<string> _p;
         int _turn;
         bool _started;
-        // queue<Turn> gameTurns;
-        std:: vector<coup::Turn*>_gameTurns;
 
         //constructer
         Game();
@@ -47,7 +43,7 @@ namespace coup {
         // return the winners name
         string winner();
 
-        // std::vector<Turn*> t();
+        
 
     };
 }

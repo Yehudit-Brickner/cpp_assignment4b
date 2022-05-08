@@ -20,7 +20,7 @@ Contessa::Contessa(Game & g, string n){
         this->_role="Contessa";
         this->_state = 0;
         this->_lastturn="none";
-        g.addplayer(n);
+        // g.addplayer(n);
         g._player.push_back(& *this);
     }
     else{

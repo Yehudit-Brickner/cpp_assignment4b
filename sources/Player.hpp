@@ -20,23 +20,23 @@ namespace coup {
             string _lastturn;
         
             //constructers
-            Player(coup::Game & g, string n);
+            Player(coup::Game & g, string  n);
             Player();
             ~Player(){}
             
-            int coins();
+            int coins() const;
             void updateCoins(int u);
             void updateTurn();
-            string getName();
-            int getCoins();
+            string getName()const;
+            int getCoins()const;
             virtual string role();
             void income();
             void foreign_aid(); 
             void virtual coup(Player & p);
             void virtual block(Player & p);
             void setState(int s);
-            void setLastturn(string s);
-            string getLastturn();
+            void setLastturn(string s) ;
+            string getLastturn()const;
             void print();
             bool operator==(const Player & m ) const;
     };

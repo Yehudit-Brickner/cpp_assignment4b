@@ -10,7 +10,7 @@ namespace coup{
  class Ambassador : public Player{
 
         public: 
-            Ambassador(Game & g, string n);
+            Ambassador(Game & g, string  n);
             ~Ambassador(){}              
             void block(Player & p) override;
             void transfer(coup::Player & p1, coup::Player & p2);

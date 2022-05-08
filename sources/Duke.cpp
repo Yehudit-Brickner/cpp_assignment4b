@@ -9,7 +9,7 @@ using namespace std;
 using namespace coup;
 
 
-Duke::Duke(Game & g, string n){
+Duke::Duke(Game & g, string  n){
     const int six=6;
     cout<< "this is a constructor for Duke"<< endl;
     bool canadd=g._started;
@@ -21,7 +21,7 @@ Duke::Duke(Game & g, string n){
         this->_state = 0;
         this->_lastturn="none";
         g._player.push_back(& *this);
-        g.addplayer(n);
+        // g.addplayer(n);
     }
     else{
        throw std::invalid_argument( "too many players!" );  
