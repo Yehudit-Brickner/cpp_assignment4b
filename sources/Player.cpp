@@ -143,6 +143,7 @@ void Player::coup(coup::Player & p){
     }
 
 
+
 void Player::print(){
     cout<<this<< "  "<<this->role()<< "  "<< this->getName() <<endl;
 }
