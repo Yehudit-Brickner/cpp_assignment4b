@@ -1,5 +1,3 @@
-
-
 #include "Player.hpp"
 #include <iostream>
 #include <stdexcept>
@@ -26,11 +24,8 @@ Player::Player(Game & g, string  n) {
        
 }
 
-string Player::getName() const{
-    return this->_name;
-}
 
-int  Player::getCoins()const{
+int Player::coins()const{
     return this->_coins;
 }
 
@@ -40,8 +35,12 @@ void Player::updateCoins(int u){
     this->_coins=num;
 }
 
-int Player::coins()const{
+int  Player::getCoins()const{
     return this->_coins;
+}
+
+string Player::getName() const{
+    return this->_name;
 }
 
 void Player::setState(int s){
@@ -56,8 +55,8 @@ string Player::getLastturn()const{
     return this->_lastturn;
 }
 
-void Player::print(){
-    cout<<this<< "  "<<this->role()<< "  "<< this->getName() <<endl;
+string Player::role(){
+    return this->getName();
 }
 
 
@@ -104,17 +103,9 @@ void Player::foreign_aid(){
     this->_game->updateTurn();
 }
 
-
 void Player::block(coup::Player & p){
     throw std::invalid_argument( "this player cant block the other player" );     
 }
-
-
-
-string Player::role(){
-    return this->getName();
-}
-
 
 void Player::coup(coup::Player & p){
     const int  seven=7;
@@ -150,3 +141,8 @@ void Player::coup(coup::Player & p){
     this->updateCoins(-seven);
     this->_game->updateTurn(); 
     }
+
+
+void Player::print(){
+    cout<<this<< "  "<<this->role()<< "  "<< this->getName() <<endl;
+}

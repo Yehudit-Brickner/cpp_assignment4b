@@ -23,19 +23,26 @@ namespace coup {
             
             int coins() const;
             void updateCoins(int u);
-            void updateTurn();
-            string getName()const;
             int getCoins()const;
-            virtual string role();
-            void income();
-            void foreign_aid(); 
-            void virtual coup(Player & p);
-            void virtual block(Player & p);
+            
+            // void updateTurn();
+            
+            string getName()const;
+            
             void setState(int s);
+            
             void setLastturn(string s) ;
             string getLastturn()const;
+
+            virtual string role();
+            
+            void income();
+            void foreign_aid(); 
+            void virtual block(Player & p);
+            void virtual coup(Player & p);
+           
             void print();
-            bool operator==(const Player & m ) const;
+           
     };
 
 }
