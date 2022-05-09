@@ -8,7 +8,6 @@ using namespace std;
 namespace coup{
 
   class Captain : public Player{
-
         public:
             Captain(Game & g, string  n);
             ~Captain(){}  

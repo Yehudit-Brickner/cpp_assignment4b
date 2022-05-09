@@ -10,7 +10,6 @@ using namespace coup;
 
 Assassin::Assassin(Game & g, string  n) {
     const int six=6;
-    // cout<< "this is a constructor for Assassin"<< endl;
     bool canadd=g._started;
     if (g._player.size()<six && !canadd){
         this->_game= & g;
@@ -59,7 +58,6 @@ void Assassin::coup(Player & p){
        throw std::invalid_argument( "player not in game" ); 
     }
     if(this->_coins>=seven){
-        // cout<<"Assasin coup7"<<endl;
         this->updateCoins(-seven);
         p.setState(2);
         string s= this->getName();
@@ -73,7 +71,6 @@ void Assassin::coup(Player & p){
         if(this->_coins<three){
             throw std::invalid_argument( "cant pay 3 coins" ); 
         }
-    // cout<<"Assasin coup3"<<endl;
     this->updateCoins(-three);
     p.setState(1);
     string s= this->getName();

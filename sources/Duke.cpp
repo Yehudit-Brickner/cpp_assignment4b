@@ -11,7 +11,6 @@ using namespace coup;
 
 Duke::Duke(Game & g, string  n){
     const int six=6;
-    // cout<< "this is a constructor for Duke"<< endl;
     bool canadd=g._started;
     if (g._player.size()<six && !canadd){
         this->_game = & g;
@@ -47,7 +46,6 @@ void Duke::tax(){
     }
     this->_game->_started=true;
     this->updateCoins(3);
-    // cout<<"duke took tax"<<endl;
     string s= this->getName();
     s.append(",0,tax,null,null");
     
@@ -56,7 +54,6 @@ void Duke::tax(){
 }
 
 void Duke::block(Player & p){
-    // cout<< "Duke blocking Player"<<endl;
     for (unsigned long i=0; i<this->_game->_player.size();i++){
         if (this->_game->_player[i]->getName()==p.getName()){
             vector<string> str;

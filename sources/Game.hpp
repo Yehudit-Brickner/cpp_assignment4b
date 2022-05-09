@@ -29,7 +29,7 @@ namespace coup {
 
         void print();
 
-        // void setTurn(int t);
+        
 
         void updateTurn();     
         

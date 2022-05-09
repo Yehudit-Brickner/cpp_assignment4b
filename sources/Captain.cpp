@@ -11,7 +11,6 @@ using namespace coup;
 
 Captain::Captain(Game & g, string  n){
     const int six=6;
-    // cout<< "this is a constructor for Captain"<< endl;
     bool canadd=g._started;
     if (g._player.size()<six && !canadd){
         this->_game=& g;
@@ -78,8 +77,6 @@ void Captain::block(Player & p){
     if(p.role()!="Captain"){
         throw std::invalid_argument( "this player cant block the other player" );
     }
-    // cout<< "someone played block \n"<< endl;
-    // cout<< "Captain blocking Captain"<<endl;
     for (unsigned long i=0; i<this->_game->_player.size();i++){
         if (this->_game->_player[i]->getName()==p.getName()){
             vector<string> str;
