@@ -9,14 +9,14 @@ using namespace std;
 
 using namespace coup;
 
-Player::Player(Game & g, string  n){
+Player::Player(Game & g, string  n) {
     const int six=6;
     bool canadd=g._started;
     if (g._player.size()<six && !canadd){
         this->_game=& g;
         this->_name=std::move(n);
         this->_coins=0;
-        this->_role="Player";
+        // this->_role="Player";
         this->_lastturn="none";
         this->_state=0;
         g._player.push_back(& *this);
@@ -24,16 +24,16 @@ Player::Player(Game & g, string  n){
     else{
        throw std::invalid_argument( "too many players!" );  
     }
-    
+       
 }
 
-Player::Player(){
-    
-        this->_coins=0;
-        this->_role="Player";
-        this->_lastturn="none";
-        this->_state=0;
-}
+// Player::Player(){
+//     // cout<<"default player constructer"<<endl;
+//         // this->_coins=0;
+//         // this->_role="Player";
+//         // this->_lastturn="none";
+//         // this->_state=0;
+// }
 
 string Player::getName() const{
     return this->_name;

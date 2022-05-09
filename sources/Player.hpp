@@ -15,13 +15,13 @@ namespace coup {
             int _coins;
             coup::Game* _game;
             string _name;
-            string _role;
+            // string _role;
             int _state;
             string _lastturn;
         
             //constructers
             Player(coup::Game & g, string  n);
-            Player();
+            // Player();
             ~Player(){}
             
             int coins() const;
