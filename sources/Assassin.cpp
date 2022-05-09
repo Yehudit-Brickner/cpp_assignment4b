@@ -9,28 +9,11 @@ using namespace coup;
 
 
 Assassin::Assassin(Game & g, string  n):Player(g, std::move(n)) {
-    // const int six=6;
-    // bool canadd=g._started;
-    // if (g._player.size()<six && !canadd){
-    //     this->_game= & g;
-    //     this->_name=std::move(n);
-    //     this->_coins=0;
-    //     // this->_role="Assassin";
-    //     this->_state = 0;
-    //     this->_lastturn="none";
-    //     g._player.push_back(& *this);
-    // }
-    // else{
-    //    throw std::invalid_argument( "too many players!" );  
-    // }
-    // Player(g,n);
-    
+
 }
 
 
-
 string Assassin::role(){
-    // return this->_role;
     return "Assassin";
 }
 

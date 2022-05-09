@@ -16,7 +16,6 @@ Player::Player(Game & g, string  n) {
         this->_game=& g;
         this->_name=std::move(n);
         this->_coins=0;
-        // this->_role="Player";
         this->_lastturn="none";
         this->_state=0;
         g._player.push_back(& *this);
@@ -26,14 +25,6 @@ Player::Player(Game & g, string  n) {
     }
        
 }
-
-// Player::Player(){
-//     // cout<<"default player constructer"<<endl;
-//         // this->_coins=0;
-//         // this->_role="Player";
-//         // this->_lastturn="none";
-//         // this->_state=0;
-// }
 
 string Player::getName() const{
     return this->_name;
@@ -105,9 +96,7 @@ void Player::foreign_aid(){
       throw std::invalid_argument( "cant play with 1 player or less!" );    
     }
     this->_game->_started=true;
-    // cout<<"forign_aid"<<endl;
     updateCoins(2);
-    // cout<<"added 2 coins"<<endl;
     string s= this->getName();
    
     s.append(",0,forign_aid,null,null");
