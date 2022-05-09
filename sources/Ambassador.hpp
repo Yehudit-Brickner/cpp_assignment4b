@@ -1,7 +1,5 @@
 #pragma once
-#include <iostream>
 #include "Player.hpp"
-#include "Captain.hpp"
 
 using namespace std;
 

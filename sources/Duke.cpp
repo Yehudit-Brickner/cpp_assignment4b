@@ -13,11 +13,6 @@ Duke::Duke(Game & g, string  n):Player(g, std::move(n)){
 
 }
 
-
-string Duke::role(){
-    return "Duke";
-}
-
 void Duke::tax(){
     const int ten=10; 
     const int one=1;
@@ -64,3 +59,6 @@ void Duke::block(Player & p){
     throw std::invalid_argument( "can't block!" );
 }
 
+string Duke::role(){
+    return "Duke";
+}

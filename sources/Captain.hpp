@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Player.hpp"
-#include "Duke.hpp"
-#include "Captain.hpp"
 using namespace std;
 
 namespace coup{

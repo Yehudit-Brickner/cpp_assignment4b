@@ -12,12 +12,6 @@ Assassin::Assassin(Game & g, string  n):Player(g, std::move(n)) {
 
 }
 
-
-string Assassin::role(){
-    return "Assassin";
-}
-
-
 void Assassin::coup(Player & p){
 
     const int seven=7;
@@ -65,4 +59,8 @@ void Assassin::coup(Player & p){
     this->setLastturn(s);
     this->_game->updateTurn(); 
     }
+}
+
+string Assassin::role(){
+    return "Assassin";
 }

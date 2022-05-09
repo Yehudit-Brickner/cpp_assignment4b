@@ -14,43 +14,6 @@ Ambassador::Ambassador(Game & g, string  n): Player(g, std::move(n)){
      
 }
 
-string Ambassador::role(){
-    return "Ambassador";
-}
-
-
-void Ambassador::transfer(coup::Player& p1, coup::Player &p2){
-    const int ten=10; 
-    const int one=1;
-    unsigned long turnn=(unsigned long)this->_game->_turn;
-    if(this->_game->_player[turnn]!=this){
-         throw std::invalid_argument( "not your turn!" ); 
-    }
-    if(this->_coins>=ten){
-        throw std::invalid_argument( "you have to do coup!" );  
-    }
-    if(this->_game->_player.size()<=one){
-      throw std::invalid_argument( "cant play with 1 player or less!" );    
-    }
-    this->_game->_started=true;
-    if(p1.coins()>=one){
-        p1.updateCoins(-1);
-        p2.updateCoins(1);
-        string s= this->getName();
-        s.append(",0,transfer,");
-        s.append(p1.getName());
-        s.append(",");
-        s.append(p2.getName());
-        this->setLastturn(s);
-        this->_game->updateTurn(); 
-    }
-    else{
-       throw std::invalid_argument( "not enough coins to transfer" );  
-    }
-}
-
-
-
 void Ambassador::block(Player & p){
    
     if(p.role()!="Captain"){
@@ -80,4 +43,38 @@ void Ambassador::block(Player & p){
         }
     }
     throw std::invalid_argument( "can't block!");
+}
+
+string Ambassador::role(){
+    return "Ambassador";
+}
+
+void Ambassador::transfer(coup::Player& p1, coup::Player &p2){
+    const int ten=10; 
+    const int one=1;
+    unsigned long turnn=(unsigned long)this->_game->_turn;
+    if(this->_game->_player[turnn]!=this){
+         throw std::invalid_argument( "not your turn!" ); 
+    }
+    if(this->_coins>=ten){
+        throw std::invalid_argument( "you have to do coup!" );  
+    }
+    if(this->_game->_player.size()<=one){
+      throw std::invalid_argument( "cant play with 1 player or less!" );    
+    }
+    this->_game->_started=true;
+    if(p1.coins()>=one){
+        p1.updateCoins(-1);
+        p2.updateCoins(1);
+        string s= this->getName();
+        s.append(",0,transfer,");
+        s.append(p1.getName());
+        s.append(",");
+        s.append(p2.getName());
+        this->setLastturn(s);
+        this->_game->updateTurn(); 
+    }
+    else{
+       throw std::invalid_argument( "not enough coins to transfer" );  
+    }
 }

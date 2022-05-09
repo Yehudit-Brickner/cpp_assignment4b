@@ -13,12 +13,6 @@ Contessa::Contessa(Game & g, string n):Player(g, std::move(n)){
   
 }
 
-
-string Contessa::role(){
-    return "Contessa";
-}
-
-
 void Contessa::block(Player & p){
     if(p.role()!="Assassin"){
         throw std::invalid_argument( "this player cant block the other player" );
@@ -46,3 +40,6 @@ void Contessa::block(Player & p){
     throw std::invalid_argument( "can't block!" );
 }
     
+string Contessa::role(){
+    return "Contessa";
+}

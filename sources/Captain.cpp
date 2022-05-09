@@ -13,10 +13,6 @@ Captain::Captain(Game & g, string  n):Player(g,std::move(n)){
   
 }
 
-string Captain::role(){
-    return "Captain";
-}
-
 void Captain::steal(coup::Player & p){
     const int ten=10; 
     const int two=2;
@@ -58,8 +54,6 @@ void Captain::steal(coup::Player & p){
     }  
 }
 
-
-
 void Captain::block(Player & p){
     if(p.role()!="Captain"){
         throw std::invalid_argument( "this player cant block the other player" );
@@ -89,3 +83,6 @@ void Captain::block(Player & p){
     throw std::invalid_argument( "can't block!" );
 }
     
+string Captain::role(){
+    return "Captain";
+}

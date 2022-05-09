@@ -1,6 +1,5 @@
 #pragma once
 #include "Player.hpp"
-#include "Assassin.hpp"
 
 using namespace std;
 
