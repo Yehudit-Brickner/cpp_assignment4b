@@ -9,8 +9,7 @@ namespace coup{
 
   class Captain : public Player{
         public:
-            Captain(Game & g, string  n);
-            ~Captain(){}  
+            Captain(Game & g, string  n); 
             void steal(coup::Player & p);
             void block(coup::Player & p)override;
             string role() override;

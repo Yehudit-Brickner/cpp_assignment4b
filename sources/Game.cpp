@@ -12,12 +12,10 @@ using namespace coup;
     Game::Game(){
         std:: vector<coup::Player*> _player;
         _turn = 0;
-        _started=false;
-        
-        
+        _started=false;   
     }
 
-
+    // uodate who is playing
     void Game::updateTurn(){    
         int s=1;
         while (s!=0){
@@ -35,10 +33,6 @@ using namespace coup;
             }
         }
     }
-
- 
-
-    
  
     // make a vector of the players name
     std::vector<string> Game::players(){
@@ -51,12 +45,14 @@ using namespace coup;
         return aliveplayers;
     }
 
+    // return whos turn it is
     string Game::turn(){
         unsigned long t=(unsigned long)this->_turn;
         vector<string> p=this->players();
         return p[t];        
     }
 
+     // return the winners name
     string Game::winner(){
         // cout<<"checking if there is a winner"<<endl;
         if (this ->_player.size()==1 && this->_started){

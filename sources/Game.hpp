@@ -22,18 +22,11 @@ namespace coup {
         bool _started;
 
         //constructer
-        Game();
-        ~Game(){}
-       
-        void addplayer(string const s);
+        Game(); 
 
-        void print();
-
-        
-
+        // uodate who is playing
         void updateTurn();     
         
-
         // return a vector of the players name
         std::vector<string> players();
 
@@ -41,9 +34,7 @@ namespace coup {
         string turn();
 
         // return the winners name
-        string winner();
-
-        
+        string winner();  
 
     };
 }
